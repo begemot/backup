@@ -1,0 +1,39 @@
+<?php
+
+function randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 24; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
+
+$exclude_base_array =[
+'sys',
+'performance_schema',
+'mysql',
+'information_schema',
+'ccnet_db',
+'ccnet-db'
+];
+$userNames = [];
+foreach (glob("./../*.sql.gz") as $filename) {
+   // echo "$filename размер " . filesize($filename) . "\n";
+	 $dbName = str_replace('.sql.gz','',$filename);
+	$dbName = str_replace('./../','',$dbName);
+	
+	$userNames[$dbName]=['pass'=>randomPassword()];
+	
+	
+
+	
+}
+print_r($userNames);
+file_put_contents('./pass.php','<?php return '.var_export($userNames,true).'?>');
+
+
+
+?>
