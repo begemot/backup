@@ -1,0 +1,15 @@
+{
+  "dumpsDir": "/home/sqlDumps",
+  "listOfBackupDirs": {
+
+  },
+  "ignoredDataBases": [
+    "performance_schema",
+    "information_schema"
+
+  ],
+  "db": {
+    "user": "",
+    "pass": ""
+  }
+}

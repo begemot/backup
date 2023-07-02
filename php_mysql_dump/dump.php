@@ -1,7 +1,13 @@
-<?php 
+<?php
+
+require_once (__DIR__.'/../utils.php');
+$config = getConfig();
+
+$sqlDumpDir = $config['dumpsDir'];
+
 $mysqlhost = 'localhost';
-$mysqluser = 'root';
-$mysqlpass = 'mgILaztSLQb9QaSSZ6PnsopZ';
+$mysqluser = $config['db']['user'];
+$mysqlpass = $config['db']['pass'];
 
 
 $mysqli = new mysqli($mysqlhost, $mysqluser, $mysqlpass);
@@ -13,9 +19,18 @@ $result = $mysqli->query('show databases', MYSQLI_USE_RESULT);
 $dbArray = $result->fetch_all();
 
 foreach ($dbArray as $db){
-	print_r ($db);
-	$dbname = $db[0];
-	exec ('mysqldump --system=users -u'.$mysqluser.' -h'.$mysqlhost.' -pmgILaztSLQb9QaSSZ6PnsopZ '.$dbname.' | gzip > /home/php_mysql_dump/'.$dbname.'.sql.gz');
+	printWhite('Делаем дамп таблицы '.$db[0]);
+	
+	if (in_array( $db[0],$config['ignoredDataBases'])){
+        printRed("Пропускаем таблицу!");
+    } else {
+
+        $dbname = $db[0];
+        $command = 'mysqldump --system=users -uroot'.' -h'.$mysqlhost.' -p3c39ju8M8Cpj8KYjyc '.$dbname.' | gzip > '.$sqlDumpDir.'/'.$dbname.'.sql.gz';
+        exec ($command);
+     
+        
+    }
 }
 
 

@@ -1,4 +1,6 @@
 <?php 
+require ('/home/bkp_from_git//php_mysql_dump/dump.php');
+
 $dirsForBackup = [
 '/home/GIR',
 '/home/atv',
@@ -15,9 +17,12 @@ print_r($dirsForBackup);
 
 
 foreach ($dirsForBackup as $path){
-$command ="rsync -avhb --exclude '*/protected/runtime/*' --exclude '*.log' --delete --backup-dir=./bkp/backUpOld/c_$(date +%d.%m.%Y_%H:%M) $path ./bkp";
+$command ="rsync -avhb --exclude '*/protected/runtime/*' --exclude '*.log' --delete --backup-dir=/home/bkp_from_git/bkp/backUpOld/c_$(date +%d.%m.%Y_%H:%M) $path ./bkp";
 echo exec ($command);
 }
+
+$log = date('Y-m-d H:i:s') . ' Скрипт отработал!';
+file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
 
 
 ?>
