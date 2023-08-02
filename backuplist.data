@@ -6,3 +6,4 @@
 /home/php_mysql_dump
 /home/sqlDumps
 /etc/letsencrypt
+/var/spool/cron

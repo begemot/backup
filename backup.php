@@ -11,7 +11,7 @@ $dirsForBackup = [
 ];
 
  
-$dirsForBackup = file('./backuplist.data', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$dirsForBackup = file(__DIR__.'/backuplist.data', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 print_r($dirsForBackup);
 
 
