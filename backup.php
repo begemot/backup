@@ -17,7 +17,7 @@ print_r($dirsForBackup);
 
 
 foreach ($dirsForBackup as $path){
-$command ="rsync -avhb --exclude '*/protected/runtime/*' --exclude '*.log' --delete --backup-dir=/home/bkp_from_git/bkp/backUpOld/c_$(date +%d.%m.%Y_%H:%M) $path ./bkp";
+$command ="rsync -avhb --exclude '*/protected/runtime/*' --exclude '*.log' --delete --backup-dir=/home/bkp_from_git/bkp/backUpOld/c_$(date +%d.%m.%Y_%H:%M) $path /home/bkp_from_git/bkp";
 echo exec ($command);
 }
 
